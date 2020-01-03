@@ -1,14 +1,21 @@
 class RomanNumber:
-    number: int
+    _number: int
     _roman_number: str
 
     def __init__(self, number):
-        self.number = number
+        self._number = number
         self.__convert_number()  # don't use description on function call , use it on the function
+
+    def get_number(self):
+        return self._number
+
+    def set_number(self, new_number):
+        self._number = new_number
+        self.__convert_number()  # every time we set number ,  we reconvert the roman number
 
     def __convert_number(self):  # convert number into roman number
         roman = ""
-        number = self.number
+        number = self.get_number()
         while number >= 1000:
             number -= 1000
             roman += "M"
@@ -38,27 +45,23 @@ class RomanNumber:
     def __add__(self, other):
         if type(other) is str:
             return self._roman_number + other
-        new_roman = RomanNumber(self.number)
-        new_roman.number += other.number
-        new_roman.__convert_number()
+        new_roman = RomanNumber(self.get_number())
+        new_roman.set_number(self.get_number() + other.get_number())
         return new_roman
 
     def __sub__(self, other):
-        new_roman = RomanNumber(self.number)
-        new_roman.number -= other.number
-        new_roman.__convert_number()
+        new_roman = RomanNumber(self.get_number())
+        new_roman.set_number(self.get_number() - other.get_number())
         return new_roman
 
     def __mul__(self, other):
-        new_roman = RomanNumber(self.number)
-        new_roman.number *= other.number
-        new_roman.__convert_number()
+        new_roman = RomanNumber(self.get_number())
+        new_roman.set_number(self.get_number() * other.get_number())
         return new_roman
 
     def __truediv__(self, other):
-        new_roman = RomanNumber(self.number)
-        new_roman.number //= other.number
-        new_roman.__convert_number()
+        new_roman = RomanNumber(self.get_number())
+        new_roman.set_number(self.get_number() // other.get_number())
         return new_roman
 
     def __floordiv__(self, other):
@@ -66,16 +69,15 @@ class RomanNumber:
         return new_roman
 
     def __mod__(self, other):
-        new_roman = RomanNumber(self.number)
-        new_roman.number %= other.number
-        new_roman.__convert_number()
+        new_roman = RomanNumber(self.get_number())
+        new_roman.set_number(self.get_number() % other.get_number())
         return new_roman
 
     def __eq__(self, other):
         if type(other) == str:
             return self._roman_number == other
         else:
-            return self.number == other.number
+            return self.get_number() == other.get_number()
 
     def __repr__(self):
         return str(self._roman_number)
