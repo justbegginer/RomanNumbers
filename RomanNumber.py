@@ -30,14 +30,14 @@ class RomanNumber:
         while number >= 1:
             number -= 1
             roman += "I"
-        self._roman_number = roman
+        if roman == "":
+            self._roman_number = "0"
+        else:
+            self._roman_number = roman
 
     def __add__(self, other):
         if type(other) is str:
             return self._roman_number + other
-        if type(self) is str:
-            print("return")
-            return self + other._roman_number
         new_roman = RomanNumber(self.number)
         new_roman.number += other.number
         new_roman.__convert_number()
@@ -83,13 +83,6 @@ class RomanNumber:
 
 first_number = RomanNumber(2)
 second_number = RomanNumber(4)
-
-# assert type(first_number + second_number) is str, "no the type is " + str(type(first_number + second_number))
-
-# print(first_number + "F")
-
-# input()
-#print(second_number // first_number)
 
 assert str(first_number + second_number) == "VI", "should be six we've got "  # wtf
 assert str(second_number - first_number) == "II", "should be two"
