@@ -18,10 +18,11 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(second_number // first_number, "II")
 
     def test_div_special(self):
-        first = roman(3)
-        second = roman(2)
-        self.assertEqual(first_number // second_number, first_number / second_number)
-        self.assertEqual(second_number // first_number, "I")
+        first_extra = roman(3)
+        second_extra = roman(2)
+        self.assertEqual(first_extra // second_extra, first_extra / second_extra,
+                         (first_extra// second_extra).get_number())
+        self.assertEqual(first_extra // second_extra, "I")
 
     def test_sub(self):
         self.assertEqual(second_number - first_number, "II")
