@@ -2,9 +2,17 @@ class RomanNumber:
     _number: int
     _roman_number: str
 
-    def __init__(self, number):
-        self._number = number
-        self.__convert_number()  # don't use description on function call , use it on the function
+    def __init__(self, number=None, string=None):
+        if number is not None:
+            self.set_number(number)  # don't use description on function call , use it on the function
+            if type(number) is not int:
+                raise TypeError
+        elif string is not None:
+            self.convert_string_roman_to_number(string=string)
+            if type(string) is not str:
+                raise TypeError
+        else:
+            assert False, "Argument exception"
 
     def get_number(self):
         return self._number
@@ -16,6 +24,9 @@ class RomanNumber:
     def __convert_number(self):  # convert number into roman number
         roman = ""
         number = self.get_number()
+        if number < 0:
+            number = abs(number)
+            roman = "-"
         while number >= 1000:
             number -= 1000
             roman += "M"
@@ -41,6 +52,33 @@ class RomanNumber:
             self._roman_number = "0"
         else:
             self._roman_number = roman
+
+    def convert_string_roman_to_number(self, string):
+        result = 0
+        convert_to_negative = False
+        if string[0] == "-":
+            string = string[1:]
+            convert_to_negative = True
+        for i in string:
+            if i == "M":
+                result += 1000
+            elif i == "D":
+                result += 500
+            elif i == "C":
+                result += 100
+            elif i == "L":
+                result += 50
+            elif i == "X":
+                result += 10
+            elif i == "V":
+                result += 5
+            elif i == "I":
+                result += 1
+            else:
+                raise ValueError
+        if convert_to_negative:
+            result = -result
+        self.set_number(result)
 
     def __add__(self, other):
         if type(other) is str:
@@ -74,21 +112,12 @@ class RomanNumber:
         return new_roman
 
     def __eq__(self, other):
-        if type(other) == str:
+        if type(other) is str:
             return self._roman_number == other
+        elif type(other) is int:
+            return self.get_number() == other
         else:
             return self.get_number() == other.get_number()
 
     def __repr__(self):
         return str(self._roman_number)
-
-
-first_number = RomanNumber(2)
-second_number = RomanNumber(4)
-
-assert str(first_number + second_number) == "VI", "should be six we've got "  # wtf
-assert str(second_number - first_number) == "II", "should be two"
-assert str(second_number / first_number) == "II" and str(
-    second_number // first_number) == "II", "in both case we should get two"
-assert str(second_number * first_number) == "VIII", "should be eight"
-assert second_number != first_number, "numbers not equal"
