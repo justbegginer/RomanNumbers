@@ -8,9 +8,9 @@ second_number = roman(4)
 class MyTestCase(unittest.TestCase):
     def test_init(self):
         self.assertEqual(roman(10), "X")
-        self.assertEqual(roman(string="XV"), 15)
+        self.assertEqual(roman("XV"), 15)
         try:
-            roman(string="Mn")
+            roman("Mn")
         except ValueError:
             pass
         else:

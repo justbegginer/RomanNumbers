@@ -2,17 +2,13 @@ class RomanNumber:
     _number: int
     _roman_number: str
 
-    def __init__(self, number=None, string=None):
-        if number is not None:
+    def __init__(self, number):
+        if type(number) is int:
             self.set_number(number)  # don't use description on function call , use it on the function
-            if type(number) is not int:
-                raise TypeError
-        elif string is not None:
-            self.convert_string_roman_to_number(string=string)
-            if type(string) is not str:
-                raise TypeError
+        elif type(number) is str:
+            self.convert_string_roman_to_number(string=number)
         else:
-            assert False, "Argument exception"
+            raise TypeError
 
     def get_number(self):
         return self._number
