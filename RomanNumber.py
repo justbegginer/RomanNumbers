@@ -88,6 +88,9 @@ class RomanNumber:
         else:
             return other
 
+    def __str__(self):
+        return self._roman_number
+
     def __add__(self, other):
         other = RomanNumber.__different_types_operations(other)
         new_roman = RomanNumber(self.get_number)

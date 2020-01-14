@@ -65,6 +65,17 @@ class MyTestCase(unittest.TestCase):
         self.assertTrue(first_number >= 2)
         self.assertTrue(first_number <= 2)
 
+    def test__different_types_of_operations_func(self):
+        self.assertEqual(first_number + 3, 5)
+        self.assertEqual(second_number - 2, first_number)
+        self.assertEqual(first_number * 2, second_number)
+        self.assertEqual(second_number / 2, first_number)
+        self.assertEqual(second_number // 2, first_number)
+        self.assertEqual(first_number % 4, 2)
+
+    def test_str(self):
+        self.assertEqual(str(second_number) + str(first_number), "IIIIII")
+
 
 if __name__ == '__main__':
     unittest.main()
