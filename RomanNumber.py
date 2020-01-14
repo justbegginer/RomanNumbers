@@ -107,7 +107,7 @@ class RomanNumber:
         return new_roman
 
     def __truediv__(self, other):
-        other =RomanNumber.__different_types_operations(other)
+        other = RomanNumber.__different_types_operations(other)
         new_roman = RomanNumber(self.get_number)
         new_roman.set_number(self.get_number // other.get_number)
         return new_roman
@@ -125,6 +125,18 @@ class RomanNumber:
     def __lt__(self, other):
         other = RomanNumber.__different_types_operations(other)
         return self.get_number < other.get_number
+
+    def __gt__(self, other):
+        other = RomanNumber.__different_types_operations(other)
+        return self.get_number > other.get_number
+
+    def __le__(self, other):
+        other = RomanNumber.__different_types_operations(other)
+        return self.get_number <= other.get_number
+
+    def __ge__(self, other):
+        other = RomanNumber.__different_types_operations(other)
+        return self.get_number >= other.get_number
 
     def __bool__(self):
         return self.get_number

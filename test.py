@@ -36,7 +36,7 @@ class MyTestCase(unittest.TestCase):
         first_extra = roman(3)
         second_extra = roman(2)
         self.assertEqual(first_extra // second_extra, first_extra / second_extra,
-                         (first_extra // second_extra).get_number())
+                         (first_extra // second_extra).get_number)
         self.assertEqual(first_extra // second_extra, "I")
 
     def test_sub(self):
@@ -51,8 +51,19 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual((first_number - second_number) * first_number, "-IIII")
 
     def test_equal(self):
-        self.assertEqual(first_number, 2)
-        self.assertEqual(second_number, 4)
+        self.assertTrue(first_number == 2)
+        self.assertTrue(second_number == 4)
+
+    def test_compare(self):
+        self.assertTrue(first_number < 4)  # __lt__ override function
+        self.assertTrue(3 > first_number)
+
+    def test_not_equal(self):
+        self.assertTrue(first_number != second_number)
+
+    def test_compare_or_equal(self):
+        self.assertTrue(first_number >= 2)
+        self.assertTrue(first_number <= 2)
 
 
 if __name__ == '__main__':
