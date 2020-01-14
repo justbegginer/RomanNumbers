@@ -10,6 +10,7 @@ class RomanNumber:
         else:
             raise TypeError
 
+    @property
     def get_number(self):
         return self._number
 
@@ -19,7 +20,7 @@ class RomanNumber:
 
     def __convert_number(self):  # convert number into roman number
         roman = ""
-        number = self.get_number()
+        number = self.get_number
         if number < 0:
             number = abs(number)
             roman = "-"
@@ -79,23 +80,23 @@ class RomanNumber:
     def __add__(self, other):
         if type(other) is str:
             return self._roman_number + other
-        new_roman = RomanNumber(self.get_number())
-        new_roman.set_number(self.get_number() + other.get_number())
+        new_roman = RomanNumber(self.get_number)
+        new_roman.set_number(self.get_number + other.get_number)
         return new_roman
 
     def __sub__(self, other):
-        new_roman = RomanNumber(self.get_number())
-        new_roman.set_number(self.get_number() - other.get_number())
+        new_roman = RomanNumber(self.get_number)
+        new_roman.set_number(self.get_number - other.get_number)
         return new_roman
 
     def __mul__(self, other):
-        new_roman = RomanNumber(self.get_number())
-        new_roman.set_number(self.get_number() * other.get_number())
+        new_roman = RomanNumber(self.get_number)
+        new_roman.set_number(self.get_number * other.get_number)
         return new_roman
 
     def __truediv__(self, other):
-        new_roman = RomanNumber(self.get_number())
-        new_roman.set_number(self.get_number() // other.get_number())
+        new_roman = RomanNumber(self.get_number)
+        new_roman.set_number(self.get_number // other.get_number)
         return new_roman
 
     def __floordiv__(self, other):
@@ -103,17 +104,24 @@ class RomanNumber:
         return new_roman
 
     def __mod__(self, other):
-        new_roman = RomanNumber(self.get_number())
-        new_roman.set_number(self.get_number() % other.get_number())
+        new_roman = RomanNumber(self.get_number)
+        new_roman.set_number(self.get_number % other.get_number)
         return new_roman
+
+    def __lt__(self, other):
+        return self.get_number < other.get_number
+
+    def __bool__(self):
+        return self.get_number
+
 
     def __eq__(self, other):
         if type(other) is str:
             return self._roman_number == other
         elif type(other) is int:
-            return self.get_number() == other
+            return self.get_number == other
         else:
-            return self.get_number() == other.get_number()
+            return self.get_number == other.get_number
 
     def __repr__(self):
         return str(self._roman_number)
