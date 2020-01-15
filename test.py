@@ -6,21 +6,6 @@ second_number = roman(4)
 
 
 class MyTestCase(unittest.TestCase):
-    def test_init(self):
-        self.assertEqual(roman(10), "X")
-        self.assertEqual(roman("XV"), 15)
-        try:
-            roman("Mn")
-        except ValueError:
-            pass
-        else:
-            raise ValueError
-        try:
-            roman()
-        except Exception:
-            pass
-        else:
-            raise Exception
 
     def test_sum(self):
         self.assertEqual(first_number + second_number, "VI", "sum error")
@@ -65,6 +50,26 @@ class MyTestCase(unittest.TestCase):
         self.assertTrue(first_number >= 2)
         self.assertTrue(first_number <= 2)
 
+
+
+class SpecialFunctionsTest(unittest.TestCase):
+
+    def test_init(self):
+        self.assertEqual(roman(10), "X")
+        self.assertEqual(roman("XV"), 15)
+        try:
+            roman("Mn")
+        except ValueError:
+            pass
+        else:
+            raise ValueError
+        try:
+            roman()
+        except Exception:
+            pass
+        else:
+            raise Exception
+
     def test__different_types_of_operations_func(self):
         self.assertEqual(first_number + 3, 5)
         self.assertEqual(second_number - 2, first_number)
@@ -76,8 +81,8 @@ class MyTestCase(unittest.TestCase):
     def test_str(self):
         self.assertEqual(str(second_number) + str(first_number), "IIIIII")
 
-
 class IMathTest(unittest.TestCase):
+
     def test_iadd(self):
         new_roman = roman(3)
         new_roman += 3
