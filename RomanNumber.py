@@ -94,11 +94,17 @@ class RomanNumber:
     def __str__(self):
         return self._roman_number
 
-    def __add__(self, other):
+    def __int__(self):
+        return self.get_number
+
+    def __math_operation(self, other, func):
         other = RomanNumber.__different_types_operations(other)
         new_roman = RomanNumber(self.get_number)
-        new_roman.set_number(self.get_number + other.get_number)
+        new_roman.set_number(func(self.get_number, other.get_number))
         return new_roman
+
+    def __add__(self, other):
+        return self.__math_operation(other, lambda x, y: x + y)
 
     def __iadd__(self, other):
         new_roman = RomanNumber(self.get_number)
@@ -106,10 +112,7 @@ class RomanNumber:
         return new_roman
 
     def __sub__(self, other):
-        other = RomanNumber.__different_types_operations(other)
-        new_roman = RomanNumber(self.get_number)
-        new_roman.set_number(self.get_number - other.get_number)
-        return new_roman
+        return self.__math_operation(other, lambda x, y: x - y)
 
     def __isub__(self, other):
         new_roman = RomanNumber(self.get_number)
@@ -117,10 +120,7 @@ class RomanNumber:
         return new_roman
 
     def __mul__(self, other):
-        other = RomanNumber.__different_types_operations(other)
-        new_roman = RomanNumber(self.get_number)
-        new_roman.set_number(self.get_number * other.get_number)
-        return new_roman
+        return self.__math_operation(other, lambda x, y: x * y)
 
     def __imul__(self, other):
         new_roman = RomanNumber(self.get_number)
@@ -128,10 +128,7 @@ class RomanNumber:
         return new_roman
 
     def __truediv__(self, other):
-        other = RomanNumber.__different_types_operations(other)
-        new_roman = RomanNumber(self.get_number)
-        new_roman.set_number(self.get_number // other.get_number)
-        return new_roman
+        return self.__math_operation(other, lambda x, y: x // y)
 
     def __itruediv__(self, other):
         new_roman = RomanNumber(self.get_number)
@@ -139,8 +136,7 @@ class RomanNumber:
         return new_roman
 
     def __floordiv__(self, other):
-        new_roman = self.__truediv__(other)
-        return new_roman
+        return self.__truediv__(other)
 
     def __ifloordiv__(self, other):
         new_roman = RomanNumber(self.get_number)
@@ -148,10 +144,7 @@ class RomanNumber:
         return new_roman
 
     def __mod__(self, other):
-        other = RomanNumber.__different_types_operations(other)
-        new_roman = RomanNumber(self.get_number)
-        new_roman.set_number(self.get_number % other.get_number)
-        return new_roman
+        return self.__math_operation(other, lambda x, y: x % y)
 
     def __imod__(self, other):
         new_roman = RomanNumber(self.get_number)
@@ -167,12 +160,10 @@ class RomanNumber:
         return self.get_number > other.get_number
 
     def __le__(self, other):
-        other = RomanNumber.__different_types_operations(other)
-        return self.get_number <= other.get_number
+        return self.__lt__(other) or self == other
 
     def __ge__(self, other):
-        other = RomanNumber.__different_types_operations(other)
-        return self.get_number >= other.get_number
+        return self.__gt__(other) or self == other
 
     def __bool__(self):
         return self.get_number
