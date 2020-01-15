@@ -15,7 +15,10 @@ class RomanNumber:
         return self._number
 
     def set_number(self, new_number):
-        self._number = new_number
+        if type(new_number) is RomanNumber:
+            self._number = new_number.get_number
+        else:
+            self._number = new_number
         self.__convert_number()  # every time we set number ,  we reconvert the roman number
 
     def __convert_number(self):  # convert number into roman number
@@ -45,7 +48,7 @@ class RomanNumber:
         while number >= 1:
             number -= 1
             roman += "I"
-        if roman == "":
+        if roman == "":  # if string is empty that means that number was equal zero
             self._roman_number = "0"
         else:
             self._roman_number = roman
@@ -97,10 +100,20 @@ class RomanNumber:
         new_roman.set_number(self.get_number + other.get_number)
         return new_roman
 
+    def __iadd__(self, other):
+        new_roman = RomanNumber(self.get_number)
+        new_roman.set_number(self.__add__(other))
+        return new_roman
+
     def __sub__(self, other):
         other = RomanNumber.__different_types_operations(other)
         new_roman = RomanNumber(self.get_number)
         new_roman.set_number(self.get_number - other.get_number)
+        return new_roman
+
+    def __isub__(self, other):
+        new_roman = RomanNumber(self.get_number)
+        new_roman.set_number(self.__sub__(other))
         return new_roman
 
     def __mul__(self, other):
@@ -109,20 +122,40 @@ class RomanNumber:
         new_roman.set_number(self.get_number * other.get_number)
         return new_roman
 
+    def __imul__(self, other):
+        new_roman = RomanNumber(self.get_number)
+        new_roman.set_number(self.__mul__(other))
+        return new_roman
+
     def __truediv__(self, other):
         other = RomanNumber.__different_types_operations(other)
         new_roman = RomanNumber(self.get_number)
         new_roman.set_number(self.get_number // other.get_number)
         return new_roman
 
+    def __itruediv__(self, other):
+        new_roman = RomanNumber(self.get_number)
+        new_roman.set_number(self.__truediv__(other))
+        return new_roman
+
     def __floordiv__(self, other):
         new_roman = self.__truediv__(other)
+        return new_roman
+
+    def __ifloordiv__(self, other):
+        new_roman = RomanNumber(self.get_number)
+        new_roman.set_number(self.__floordiv__(other))
         return new_roman
 
     def __mod__(self, other):
         other = RomanNumber.__different_types_operations(other)
         new_roman = RomanNumber(self.get_number)
         new_roman.set_number(self.get_number % other.get_number)
+        return new_roman
+
+    def __imod__(self, other):
+        new_roman = RomanNumber(self.get_number)
+        new_roman.set_number(self.__mod__(other))
         return new_roman
 
     def __lt__(self, other):
