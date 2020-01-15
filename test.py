@@ -77,5 +77,37 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(str(second_number) + str(first_number), "IIIIII")
 
 
+class IMathTest(unittest.TestCase):
+    def test_iadd(self):
+        new_roman = roman(3)
+        new_roman += 3
+        self.assertEqual(new_roman, 6)
+
+    def test_isub(self):
+        new_roman = roman(3)
+        new_roman -= 3
+        self.assertEqual(new_roman, 0)
+
+    def test_imul(self):
+        new_roman = roman(3)
+        new_roman *= 3
+        self.assertEqual(new_roman, 9)
+
+    def test_itruediv(self):
+        new_roman = roman(3)
+        new_roman //= 3
+        self.assertEqual(new_roman, 1)
+
+    def test_ifloordiv(self):
+        new_roman = roman(3)
+        new_roman /= 3
+        self.assertEqual(new_roman, 1)
+
+    def test_imod(self):
+        new_roman = roman(3)
+        new_roman %= 3
+        self.assertEqual(new_roman, 0)
+
+
 if __name__ == '__main__':
     unittest.main()
