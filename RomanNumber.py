@@ -99,12 +99,13 @@ class RomanNumber:
 
     def __math_operation(self, other, func):
         other = RomanNumber.__different_types_operations(other)
-        new_roman = RomanNumber(self.get_number)
-        new_roman.set_number(func(self.get_number, other.get_number))
-        return new_roman
+        return RomanNumber(func(self.get_number, other.get_number))
 
     def __add__(self, other):
         return self.__math_operation(other, lambda x, y: x + y)
+
+    def __radd__(self, other):
+        return self.__add__(other)
 
     def __iadd__(self, other):
         return self.__add__(other)
@@ -112,11 +113,17 @@ class RomanNumber:
     def __sub__(self, other):
         return self.__math_operation(other, lambda x, y: x - y)
 
+    def __rsub__(self, other):
+        return self.__math_operation(other, lambda x, y: y - x)  # reversed lambda function
+
     def __isub__(self, other):
         return self.__sub__(other)
 
     def __mul__(self, other):
         return self.__math_operation(other, lambda x, y: x * y)
+
+    def __rmul__(self, other):
+        return self.__mul__(other)
 
     def __imul__(self, other):
         return self.__mul__(other)
@@ -124,11 +131,17 @@ class RomanNumber:
     def __truediv__(self, other):
         return self.__math_operation(other, lambda x, y: x // y)
 
+    def __rtruediv__(self, other):
+        return self.__math_operation(other, lambda x, y: y // x)
+
     def __itruediv__(self, other):
         return self.__truediv__(other)
 
     def __floordiv__(self, other):
         return self.__truediv__(other)
+
+    def __rfloordiv__(self, other):
+        return self.__rtruediv__(other)
 
     def __ifloordiv__(self, other):
         return self.__floordiv__(other)
@@ -136,8 +149,47 @@ class RomanNumber:
     def __mod__(self, other):
         return self.__math_operation(other, lambda x, y: x % y)
 
+    def __rmod__(self, other):
+        return self.__math_operation(other, lambda x, y: y % x)
+
     def __imod__(self, other):
         return self.__mod__(other)
+
+    def __pow__(self, power, modulo=None):
+        return self.__math_operation(power, lambda x, y: x ** y)
+
+    def __rpow__(self, power):
+        return self.__math_operation(power, lambda x, y: y ** x)
+
+    def __ipow__(self, power):
+        return self.__pow__(power)
+
+    def __or__(self, other):
+        return self.__math_operation(other, lambda x, y: x | y)
+
+    def __ror__(self, other):
+        return self.__or__(other)
+
+    def __ior__(self, other):
+        return self.__or__(other)
+
+    def __and__(self, other):
+        return self.__math_operation(other, lambda x, y: x & y)
+
+    def __rand__(self, other):
+        return self.__and__(other)
+
+    def __iand__(self, other):
+        return self.__and__(other)
+
+    def __xor__(self, other):
+        return self.__math_operation(other, lambda x, y: x ^ y)
+
+    def __rxor__(self, other):
+        return self.__xor__(other)
+
+    def __ixor__(self, other):
+        return self.__xor__(other)
 
     def __lt__(self, other):
         other = RomanNumber.__different_types_operations(other)
