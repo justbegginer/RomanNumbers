@@ -3,7 +3,8 @@ class RomanNumber:
     _roman_number: str
 
     def __init__(self, number):
-        if type(number) is int:
+        if type(number) is int or \
+                type(number) is RomanNumber:
             self.set_number(number)  # don't use description on function call , use it on the function
         elif type(number) is str:
             self.convert_string_roman_to_number(string=number)
