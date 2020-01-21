@@ -145,20 +145,12 @@ class BooleanAlgebra(tCase):
 class SpecialFunctionsTest(tCase):
 
     def test_init(self):
+        with self.assertRaises(ValueError) as v_exc:
+            roman("Mn")
+        with self.assertRaises(Exception) as exc:
+            roman()
         self.assertEqual(roman(10), "X")
         self.assertEqual(roman("XV"), 15)
-        try:
-            roman("Mn")
-        except ValueError:
-            pass
-        else:
-            raise ValueError
-        try:
-            roman()
-        except Exception:
-            pass
-        else:
-            raise Exception
 
     def test__different_types_of_operations_func(self):
         self.assertEqual(first_number + 3, 5)
